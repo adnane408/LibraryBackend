@@ -19,7 +19,6 @@ public class BookNode {
     private String datePublication;
 
     @Relationship(type = "WROTE", direction = Relationship.Direction.INCOMING)
-
     private List<Author> authors;
     // getters and setters
 

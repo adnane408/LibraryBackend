@@ -22,6 +22,9 @@ public class Author {
     @Relationship(type = "WROTE_BY", direction = Relationship.Direction.INCOMING)
     private Set<BookNode> bookNodes = new HashSet<>();
 
+    @Relationship(type = "COAUTHOR", direction = Relationship.Direction.OUTGOING)
+    private Set<Author> coAuthors = new HashSet<>();
+
     // Getters and Setters
 
     public Long getId() {
@@ -62,5 +65,13 @@ public class Author {
 
     public void setBooks(Set<BookNode> bookNodes) {
         this.bookNodes = bookNodes;
+    }
+
+    public Set<Author> getCoAuthors() {
+        return coAuthors;
+    }
+
+    public void setCoAuthors(Set<Author> coAuthors) {
+        this.coAuthors = coAuthors;
     }
 }

@@ -44,6 +44,7 @@ public class BookService {
         bookNode.setTitle(savedBook.getTitle());
         bookNode.setAuthors(savedBook.getAuthors());
         bookNodeRepository.save(bookNode);
+        createCoAuthorRelationships(book.getAuthors());
 
         return savedBook;
     }
@@ -76,5 +77,22 @@ public class BookService {
 
     public BookNode findBookByTitle(String title) {
         return bookNodeRepository.findByTitle(title);
+    }
+
+    private void createCoAuthorRelationships(List<Author> authors) {
+        for (int i = 0; i < authors.size(); i++) {
+            for (int j = i + 1; j < authors.size(); j++) {
+                Author author1 = authors.get(i);
+                Author author2 = authors.get(j);
+
+                // Add each author to the other's coAuthors set
+                author1.getCoAuthors().add(author2);
+                author2.getCoAuthors().add(author1);
+
+                // Save the updated authors
+                authorRepository.save(author1);
+                authorRepository.save(author2);
+            }
+        }
     }
 }
