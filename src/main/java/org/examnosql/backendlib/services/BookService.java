@@ -59,6 +59,7 @@ public class BookService {
         Book book1= bookRepository.findByIsbn(book.getIsbn());
         if(book1!=null) {
             book1.setNmbCopie(book1.getNmbCopie()+book.getNmbCopie());
+            book1.setAuthors(book.getAuthors());
             return bookRepository.save(book1);
         };
         return saveBook(book);
